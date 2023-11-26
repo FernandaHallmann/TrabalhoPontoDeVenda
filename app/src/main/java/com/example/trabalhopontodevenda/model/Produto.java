@@ -13,6 +13,13 @@ public class Produto {
         return codigo;
     }
 
+    public Produto(int codigo, String descricao, double preco, int quantidade) {
+        this.codigo = codigo;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.quantidade = quantidade;
+    }
+
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }

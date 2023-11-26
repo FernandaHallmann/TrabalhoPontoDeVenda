@@ -1,48 +1,56 @@
 package com.example.trabalhopontodevenda.controller;
 
+import android.content.Context;
+
+import com.example.trabalhopontodevenda.dao.ProdutoDao;
+import com.example.trabalhopontodevenda.model.Produto;
+
 import java.util.ArrayList;
 
 public class ProdutoController {
 
-    public String adicionarProduto(Integer codigo, String descricao, double preco, int quantidade){
+    private Context context;
+
+    public ProdutoController(Context context) {
+        this.context = context;
+    }
+
+    public String adicionarProduto(String codigo, String descricao, String preco, String quantidade){
         try{
-            if(codigo == null){
-                return "Informe o código do Produto!";
+            if(codigo.equals("") || codigo.isEmpty()){
+                return "Informe o Código do Produto!";
             }
             if(descricao.equals("") || descricao.isEmpty()){
-                return "Informe a descrição do Produto!";
+                return "Informe a Descrição do Produto!";
             }
             if(preco.equals("") || preco.isEmpty()){
-                return "Informe o preço do Produto!";
+                return "Informe o Preço do Produto!";
             }
-            if(quantidade.equals("") || quantidade.isEmpty()){
-                return "Informe a quantidade do Produto!";
+            if(quantidade.equals("") || quantidade.isEmpty()) {
+                return "Informe a Quantidade do Produto!";
             }
 
-            Aluno aluno = AlunoDao.getInstancia(context)
-                    .getById(Integer.parseInt(ra));
-            if(aluno != null){
-                return "O RA ("+ra+") já está cadastrado!";
+            Produto produto = ProdutoDao.getInstancia(context).getById(Integer.parseInt(codigo));
+            if(produto != null){
+                return "O Código ("+codigo+") já está cadastrado!";
             }else{
-                aluno = new Aluno();
-                aluno.setRa(Integer.parseInt(ra));
-                aluno.setNome(nome);
+                produto = new Produto();
+                produto.setCodigo(Integer.parseInt(codigo));
+                produto.setDescricao(descricao);
+                produto.setPreco(Double.parseDouble(preco));
+                produto.setQuantidade(Integer.parseInt(quantidade));
 
-                AlunoDao.getInstancia(context).insert(aluno);
+                ProdutoDao.getInstancia(context).insert(produto);
             }
 
         }catch (Exception ex){
-            return "Erro ao Gravar Aluno.";
+            return "Erro ao Gravar Produto.";
         }
         return null;
     }
 
-    /**
-     * Retorna todos os alunos cadastrados no banco
-     * @return
-     */
-    public ArrayList<Aluno> retornarTodosAlunos(){
-        return AlunoDao.getInstancia(context).getAll();
+    public ArrayList<Produto> retornarTodosProdutos(){
+        return ProdutoDao.getInstancia(context).getAll();
     }
 
 }

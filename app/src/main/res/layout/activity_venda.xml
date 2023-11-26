@@ -17,27 +17,93 @@
         android:text="Código do produto:"
         android:textSize="20sp"/>
 
+    <EditText
+        android:id="@+id/edCodigoTelaVenda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:hint="Digite o código do produto"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Descrição:"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/edDescricaoTelaVenda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:hint="Digite a descrição do produto"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edCodigoTelaVenda"
+        <TextView
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginLeft="15dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="10dp"
+            android:text="Preço:"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="2dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="10dp"
-            android:hint="Digite o código do produto"/>
+            android:text="Quantidade:"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/edPrecoTelaVenda"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="10dp"
+            android:hint="Digite o preço"/>
+
+        <EditText
+            android:id="@+id/edQuantidadeTelaVenda"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="10dp"
+            android:hint="Digite a quantidade"/>
+
 
         <ImageButton
             android:id="@+id/btAddProdutoVenda"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="2dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/circle_button"
             android:src="@drawable/add_icon" />

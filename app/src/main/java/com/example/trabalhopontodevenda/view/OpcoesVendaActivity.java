@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.trabalhopontodevenda.R;
+import com.example.trabalhopontodevenda.dao.ProdutoDao;
 
 public class OpcoesVendaActivity extends AppCompatActivity {
 
@@ -19,13 +20,6 @@ public class OpcoesVendaActivity extends AppCompatActivity {
 
     public void abrirGerenciamentoVenda(View view) {
         Intent intent = new Intent(OpcoesVendaActivity.this, VendaActivity.class);
-
-        startActivity(intent);
-
-    }
-
-    public void abrirReceberPagamento(View view) {
-        Intent intent = new Intent(OpcoesVendaActivity.this, PagamentoActivity.class);
 
         startActivity(intent);
 

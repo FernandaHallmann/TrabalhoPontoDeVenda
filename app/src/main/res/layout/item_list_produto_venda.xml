@@ -22,25 +22,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/tvCodigoProduto"/>
+                android:id="@+id/tvCodigoProdutoVenda"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:id="@+id/tvDescricaoProduto"/>
+                android:id="@+id/tvDescricaoProdutoVenda"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/tvPrecoProduto"/>
+                android:id="@+id/tvPrecoProdutoVenda"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/tvQuantidadeProduto"/>
+                android:id="@+id/tvQuantidadeProdutoVenda"/>
 
         </LinearLayout>
 

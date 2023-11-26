@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.trabalhopontodevenda.R;
 import com.example.trabalhopontodevenda.controller.VendedorController;
+import com.example.trabalhopontodevenda.dao.ProdutoDao;
 
 public class MainActivity extends AppCompatActivity {
     private EditText edUsuarioEntrar;
