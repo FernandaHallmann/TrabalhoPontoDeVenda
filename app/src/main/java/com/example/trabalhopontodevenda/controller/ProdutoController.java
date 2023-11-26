@@ -4,13 +4,19 @@ import java.util.ArrayList;
 
 public class ProdutoController {
 
-    public String adicionarProduto(String ra, String nome){
+    public String adicionarProduto(Integer codigo, String descricao, double preco, int quantidade){
         try{
-            if(ra.equals("") || ra.isEmpty()){
-                return "Informe o RA do Aluno!";
+            if(codigo == null){
+                return "Informe o código do Produto!";
             }
-            if(nome.equals("") || nome.isEmpty()){
-                return "Informe o NOME do Aluno!";
+            if(descricao.equals("") || descricao.isEmpty()){
+                return "Informe a descrição do Produto!";
+            }
+            if(preco.equals("") || preco.isEmpty()){
+                return "Informe o preço do Produto!";
+            }
+            if(quantidade.equals("") || quantidade.isEmpty()){
+                return "Informe a quantidade do Produto!";
             }
 
             Aluno aluno = AlunoDao.getInstancia(context)
