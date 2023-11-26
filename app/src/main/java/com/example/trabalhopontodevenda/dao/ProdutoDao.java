@@ -9,27 +9,28 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.trabalhopontodevenda.helper.SQLiteDataHelper;
+import com.example.trabalhopontodevenda.model.Produto;
 import com.example.trabalhopontodevenda.model.Vendedor;
 
 import java.util.ArrayList;
 
-public class ProdutoDao implements IGenericDao<Vendedor> {
+public class ProdutoDao implements IGenericDao<Produto> {
     private SQLiteOpenHelper openHelper;
     private SQLiteDatabase baseDados;
-    private String[]colunas = {"USUARIO", "SENHA"};
-    private String tabela = "VENDEDOR";
+    private String[]colunas = {"CODIGO", "DESCRICAO", "PRECO", "QUANTIDADE"};
+    private String tabela = "PRODUTO";
     private Context context;
-    private static VendedorDao instancia;
+    private static ProdutoDao instancia;
 
-    public static VendedorDao getInstancia(Context context){
+    public static ProdutoDao getInstancia(Context context){
         if(instancia == null){
-            return instancia = new VendedorDao(context);
+            return instancia = new ProdutoDao(context);
         }else{
             return instancia;
         }
     }
 
-    private VendedorDao(Context context){
+    private ProdutoDao(Context context){
         this.context = context;
 
         openHelper = new SQLiteDataHelper(this.context, "PDV", null, 1);
@@ -38,51 +39,53 @@ public class ProdutoDao implements IGenericDao<Vendedor> {
     }
 
     @Override
-    public long insert(Vendedor obj) {
+    public long insert(Produto obj) {
         try{
             ContentValues valores = new ContentValues();
-            valores.put(colunas[0], obj.getUsuario());
-            valores.put(colunas[1], obj.getSenha());
+            valores.put(colunas[0], obj.getCodigo());
+            valores.put(colunas[1], obj.getDescricao());
+            valores.put(colunas[0], obj.getPreco());
+            valores.put(colunas[1], obj.getQuantidade());
 
             return baseDados.insert(tabela, null, valores);
 
         }catch (SQLException ex){
-            Log.e("PDV", "ERRO: VendedorDao.insert() "+ex.getMessage());
+            Log.e("PDV", "ERRO: ProdutoDao.insert() "+ex.getMessage());
         }
         return 0;
     }
 
     @Override
-    public long update(Vendedor obj) {
+    public long update(Produto obj) {
         try{
             ContentValues valores = new ContentValues();
-            valores.put(colunas[1], obj.getSenha());
+            valores.put(colunas[0], obj.getCodigo());
 
-            String[]identificador = {String.valueOf(obj.getUsuario())};
+            String[]identificador = {String.valueOf(obj.getCodigo())};
 
             return baseDados.update(tabela,  valores, colunas[0]+"= ?", identificador);
 
         }catch (SQLException ex){
-            Log.e("PDV", "ERRO: VendedorDao.update() "+ex.getMessage());
+            Log.e("PDV", "ERRO: ProdutoDao.update() "+ex.getMessage());
         }
         return 0;
     }
 
     @Override
-    public long delete(Vendedor obj) {
+    public long delete(Produto obj) {
         try{
-            String[]identificador = {String.valueOf(obj.getUsuario())};
+            String[]identificador = {String.valueOf(obj.getCodigo())};
 
             return baseDados.delete(tabela, colunas[0]+"= ?", identificador);
         }catch (SQLException ex){
-            Log.e("PDV", "ERRO: VendedorDao.delete() "+ex.getMessage());
+            Log.e("PDV", "ERRO: ProdutoDao.delete() "+ex.getMessage());
         }
         return 0;
     }
 
     @Override
-    public ArrayList<Vendedor> getAll() {
-        ArrayList<Vendedor> lista = new ArrayList<>();
+    public ArrayList<Produto> getAll() {
+        ArrayList<Produto> lista = new ArrayList<>();
         try{
             Cursor cursor = baseDados.query(tabela,
                     colunas, null,
@@ -91,45 +94,46 @@ public class ProdutoDao implements IGenericDao<Vendedor> {
 
             if(cursor.moveToFirst()){
                 do{
-                    Vendedor vendedor = new Vendedor();
-                    vendedor.setUsuario(cursor.getString(0));
-                    vendedor.setSenha(cursor.getString(1));
+                    Produto produto = new Produto();
+                    produto.setCodigo(Integer.parseInt(cursor.getString(0)));
+                    produto.setDescricao(cursor.getString(1));
+                    produto.setPreco(Double.parseDouble(cursor.getString(2)));
+                    produto.setQuantidade(Integer.parseInt(cursor.getString(3)));
 
-                    lista.add(vendedor);
+                    lista.add(produto);
 
                 }while (cursor.moveToNext());
             }
 
         }catch (SQLException ex){
-            Log.e("PDV", "ERRO: VendedorDao.getAll() "+ex.getMessage());
+            Log.e("PDV", "ERRO: ProdutoDao.getAll() "+ex.getMessage());
         }
 
         return lista;
     }
 
-    public Vendedor getById(int id) {
-        return null;
-    }
-
-    @Override
-    public Vendedor getById(String id) {
+    public Produto getById(int id) {
         try{
-            String[]identificador = {(id)};
+            String[]identificador = {String.valueOf(id)};
             Cursor cursor = baseDados.query(tabela, colunas,
                     colunas[0]+"= ?", identificador,
                     null, null, null);
 
             if(cursor.moveToFirst()){
-                Vendedor vendedor = new Vendedor();
-                vendedor.setUsuario(cursor.getString(0));
-                vendedor.setSenha(cursor.getString(1));
-
-                return vendedor;
+                Produto produto = new Produto();
+                produto.setCodigo(Integer.parseInt(cursor.getString(0)));
+                produto.setDescricao(cursor.getString(1));
+                produto.setPreco(Double.parseDouble(cursor.getString(2)));
+                produto.setQuantidade(Integer.parseInt(cursor.getString(3)));
+                return produto;
             }
 
         }catch (SQLException ex){
-            Log.e("PDV", "ERRO: VendedorDao.getById() "+ex.getMessage());
+            Log.e("PDV", "ERRO: ProdutoDao.getById() "+ex.getMessage());
         }
         return null;
     }
+
+    @Override
+    public Produto getById(String id) {return null;}
 }
