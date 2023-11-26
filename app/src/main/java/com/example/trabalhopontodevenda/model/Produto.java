@@ -5,7 +5,6 @@ public class Produto {
     private String descricao;
     private double preco;
     private int quantidade;
-
     public Produto() {
     }
 

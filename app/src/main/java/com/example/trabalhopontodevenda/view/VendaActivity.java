@@ -41,6 +41,10 @@ public class VendaActivity extends AppCompatActivity {
         controller = new ProdutoController(this);
         rvProdutosVenda = findViewById(R.id.rvProdutosVenda);
         btAddProdutoVenda = findViewById(R.id.btAddProdutoVenda);
+        edCodigoTelaVenda = findViewById(R.id.edCodigoTelaVenda);
+        edDescricaoTelaVenda = findViewById(R.id.edDescricaoTelaVenda);
+        edPrecoTelaVenda = findViewById(R.id.edPrecoTelaVenda);
+        edQuantidadeTelaVenda = findViewById(R.id.edQuantidadeTelaVenda);
         btAddProdutoVenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ProdutoDao implements IGenericDao<Produto> {
     private SQLiteOpenHelper openHelper;
     private SQLiteDatabase baseDados;
-    private String[]colunas = {"CODIGO", "DESCRICAO", "PRECO"};
+    private String[]colunas = {"CODIGO", "DESCRICAO", "PRECO", "QUANTIDADE"};
     private String tabela = "PRODUTO";
     private Context context;
     private static ProdutoDao instancia;
@@ -45,6 +45,7 @@ public class ProdutoDao implements IGenericDao<Produto> {
             valores.put(colunas[0], obj.getCodigo());
             valores.put(colunas[1], obj.getDescricao());
             valores.put(colunas[2], obj.getPreco());
+            valores.put(colunas[3], obj.getQuantidade());
 
             return baseDados.insert(tabela, null, valores);
 
@@ -97,6 +98,7 @@ public class ProdutoDao implements IGenericDao<Produto> {
                     produto.setCodigo(Integer.parseInt(cursor.getString(0)));
                     produto.setDescricao(cursor.getString(1));
                     produto.setPreco(Double.parseDouble(cursor.getString(2)));
+                    produto.setQuantidade(Integer.parseInt(cursor.getString(3)));
 
                     lista.add(produto);
 
