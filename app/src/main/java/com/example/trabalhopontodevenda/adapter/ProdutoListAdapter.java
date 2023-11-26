@@ -23,6 +23,10 @@ public ProdutoListAdapter(ArrayList<Produto> listaProdutos,Context context){
         this.listaProdutos = listaProdutos;
         this.context = context;
 }
+    public void clear() {
+        listaProdutos.clear();
+        notifyDataSetChanged();
+    }
 
 @NonNull
 @Override
@@ -41,6 +45,7 @@ public void onBindViewHolder(@NonNull ViewHolder holder,int position){
         holder.tvPrecoProduto.setText(String.valueOf(produtoSelecionado.getQuantidade()));
         holder.tvQuantidadeProduto.setText(String.valueOf(produtoSelecionado.getPreco()));
         }
+
 
 @Override
 public int getItemCount(){

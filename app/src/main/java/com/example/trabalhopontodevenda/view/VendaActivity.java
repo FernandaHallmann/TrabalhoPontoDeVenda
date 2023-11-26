@@ -116,12 +116,17 @@ public class VendaActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
-    public void finalizarVenda(View view) {
+    public void finalizarVenda() {
         Intent intent = new Intent(VendaActivity.this, PagamentoActivity.class);
 
         startActivity(intent);
 
-        rvProdutosVenda.setText("");
+        ProdutoListAdapter adapter = (ProdutoListAdapter) rvProdutosVenda.getAdapter();
+        if (adapter != null) {
+            adapter.clear();
+
+            tvValorTotalVenda.setText("");
+        }
     }
 
     private String gerarNumeroPedido() {
