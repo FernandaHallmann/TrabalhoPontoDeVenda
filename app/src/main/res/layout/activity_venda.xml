@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".view.VendaActivity">
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -159,11 +160,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="300dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/rvProdutosVenda"
             android:layout_below="@+id/lnLine"/>
 
@@ -196,7 +197,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
@@ -221,7 +222,7 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:backgroundTint="@color/green"
-            android:onClick="finalizarVenda"
+            android:id="@+id/btFinalizarVenda"
             android:text="Finalizar Venda"
             android:textSize="15dp" />
 

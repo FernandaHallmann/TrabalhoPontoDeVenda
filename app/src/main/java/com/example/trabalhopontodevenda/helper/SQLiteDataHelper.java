@@ -16,11 +16,12 @@ public class SQLiteDataHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE VENDEDOR (USUARIO VARCHAR(100), SENHA VARCHAR(100))");
         sqLiteDatabase.execSQL("CREATE TABLE PRODUTO (CODIGO INTEGER, DESCRICAO VARCHAR(100), PRECO DOUBLE, QUANTIDADE INTEGER)");
+
     }
 
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-
+        sqLiteDatabase.execSQL("DROP TABLE PRODUTO");
     }
 }

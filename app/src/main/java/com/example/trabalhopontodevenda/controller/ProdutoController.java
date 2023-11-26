@@ -37,8 +37,8 @@ public class ProdutoController {
                 produto = new Produto();
                 produto.setCodigo(Integer.parseInt(codigo));
                 produto.setDescricao(descricao);
-                produto.setPreco(Double.parseDouble(preco));
                 produto.setQuantidade(Integer.parseInt(quantidade));
+                produto.setPreco(Double.parseDouble(preco));
 
                 ProdutoDao.getInstancia(context).insert(produto);
             }

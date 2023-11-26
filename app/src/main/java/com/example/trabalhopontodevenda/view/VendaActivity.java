@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.trabalhopontodevenda.R;
@@ -32,6 +34,9 @@ public class VendaActivity extends AppCompatActivity {
     private EditText edPrecoTelaVenda;
     private EditText edQuantidadeTelaVenda;
     private RecyclerView rvProdutosVenda;
+    private TextView tvValorTotalVenda;
+    private Button btFinalizarVenda;
+    double valorTotal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,20 +44,30 @@ public class VendaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_venda);
 
         controller = new ProdutoController(this);
+        tvValorTotalVenda = findViewById(R.id.tvValorTotalVenda);
         rvProdutosVenda = findViewById(R.id.rvProdutosVenda);
         btAddProdutoVenda = findViewById(R.id.btAddProdutoVenda);
         edCodigoTelaVenda = findViewById(R.id.edCodigoTelaVenda);
         edDescricaoTelaVenda = findViewById(R.id.edDescricaoTelaVenda);
         edPrecoTelaVenda = findViewById(R.id.edPrecoTelaVenda);
         edQuantidadeTelaVenda = findViewById(R.id.edQuantidadeTelaVenda);
+        btFinalizarVenda = findViewById(R.id.btFinalizarVenda);
         btAddProdutoVenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                calculaTotal();
                 salvarDados();
             }
         });
 
         atualizarListaProduto();
+
+        btFinalizarVenda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finalizarVenda();
+            }
+        });
     }
 
     public void salvarDados(){
@@ -77,6 +92,10 @@ public class VendaActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "Produto adicionado com sucesso!", Toast.LENGTH_LONG).show();
             atualizarListaProduto();
+            edQuantidadeTelaVenda.setText("");
+            edCodigoTelaVenda.setText("");
+            edDescricaoTelaVenda.setText("");
+            edPrecoTelaVenda.setText("");
         }
     }
 
@@ -86,13 +105,31 @@ public class VendaActivity extends AppCompatActivity {
         rvProdutosVenda.setLayoutManager(new LinearLayoutManager(this));
         rvProdutosVenda.setAdapter(adapter);
     }
+    public void calculaTotal(){
+        double quantidade = Double.parseDouble(String.valueOf(edQuantidadeTelaVenda.getText()));
+        double preco = Double.parseDouble(String.valueOf(edPrecoTelaVenda.getText()));
+        valorTotal += quantidade * preco;
+        tvValorTotalVenda.setText(String.valueOf(valorTotal));
+    }
+    public void voltarMenu(View view) {
+        Intent intent = new Intent(VendaActivity.this, MainActivity.class);
+
+        startActivity(intent);
+    }
+    public void finalizarVenda(View view) {
+        Intent intent = new Intent(VendaActivity.this, PagamentoActivity.class);
+
+        startActivity(intent);
+
+        rvProdutosVenda.setText("");
+    }
 
     private String gerarNumeroPedido() {
         String prefixo = "PED";
         SimpleDateFormat formatoData = new SimpleDateFormat("yyyyMMdd");
         String dataAtual = formatoData.format(new Date());
         Random random = new Random();
-        int numeroAleatorio = random.nextInt(100000); // Número aleatório de 0 a 99999
+        int numeroAleatorio = random.nextInt(100000);
 
         String numeroFormatado = String.format("%05d", numeroAleatorio);
 
