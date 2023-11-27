@@ -19,6 +19,7 @@ import com.example.trabalhopontodevenda.R;
 import com.example.trabalhopontodevenda.adapter.ProdutoListAdapter;
 import com.example.trabalhopontodevenda.controller.ProdutoController;
 import com.example.trabalhopontodevenda.model.Produto;
+import com.example.trabalhopontodevenda.model.ValorTotal;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -105,17 +106,27 @@ public class VendaActivity extends AppCompatActivity {
         rvProdutosVenda.setLayoutManager(new LinearLayoutManager(this));
         rvProdutosVenda.setAdapter(adapter);
     }
+
     public void calculaTotal(){
-        double quantidade = Double.parseDouble(String.valueOf(edQuantidadeTelaVenda.getText()));
-        double preco = Double.parseDouble(String.valueOf(edPrecoTelaVenda.getText()));
-        valorTotal += quantidade * preco;
-        tvValorTotalVenda.setText(String.valueOf(valorTotal));
+        String quantidadeStr = edQuantidadeTelaVenda.getText().toString();
+        String precoStr = edPrecoTelaVenda.getText().toString();
+
+        if (!quantidadeStr.isEmpty() && !precoStr.isEmpty()) {
+            double quantidade = Double.parseDouble(quantidadeStr);
+            double preco = Double.parseDouble(precoStr);
+            valorTotal += quantidade * preco;
+            tvValorTotalVenda.setText(String.valueOf(valorTotal));
+
+            ValorTotal.getInstance().setValorTotal(valorTotal);
+        }
     }
+
     public void voltarMenu(View view) {
-        Intent intent = new Intent(VendaActivity.this, MainActivity.class);
+        Intent intent = new Intent(VendaActivity.this, OpcoesVendaActivity.class);
 
         startActivity(intent);
     }
+
     public void finalizarVenda() {
         Intent intent = new Intent(VendaActivity.this, PagamentoActivity.class);
 
@@ -127,17 +138,5 @@ public class VendaActivity extends AppCompatActivity {
 
             tvValorTotalVenda.setText("");
         }
-    }
-
-    private String gerarNumeroPedido() {
-        String prefixo = "PED";
-        SimpleDateFormat formatoData = new SimpleDateFormat("yyyyMMdd");
-        String dataAtual = formatoData.format(new Date());
-        Random random = new Random();
-        int numeroAleatorio = random.nextInt(100000);
-
-        String numeroFormatado = String.format("%05d", numeroAleatorio);
-
-        return prefixo + dataAtual + "-" + numeroFormatado;
     }
 }

@@ -17,7 +17,7 @@ public class RelatoriosActivity extends AppCompatActivity {
     }
 
     public void voltarMenu(View view) {
-        Intent intent = new Intent(RelatoriosActivity.this, MainActivity.class);
+        Intent intent = new Intent(RelatoriosActivity.this, OpcoesVendaActivity.class);
 
         startActivity(intent);
     }

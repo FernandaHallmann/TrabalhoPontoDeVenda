@@ -2,15 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:cardElevation="10dp"
         android:layout_margin="10dp"
         app:cardCornerRadius="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/tvPedido"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,27 +29,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/tvCodigoVenda"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:id="@+id/tvDescricaoProdutoVenda"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/tvQuantidadeProdutoVenda"/>
-
+                android:layout_marginTop="35dp"
+                android:textSize="18dp"
+                android:id="@+id/tvTotal"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/tvPrecoProdutoVenda"/>
-
+                android:layout_marginTop="35dp"
+                android:textSize="18dp"
+                android:id="@+id/tvPago"/>
 
         </LinearLayout>
 
